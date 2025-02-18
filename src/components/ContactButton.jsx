@@ -1,0 +1,50 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const ContactButton = () => {
+  return (
+    <StyledWrapper>
+      <button>
+        <span className="button_top">Contact</span>
+      </button>
+    </StyledWrapper>
+  );
+}
+
+const StyledWrapper = styled.div`
+  margin-left: 20px;
+  
+  button {
+    --button_radius: 0.75em;
+    --button_color: #000000;
+    --button_outline_color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--button_radius);
+    background: var(--button_outline_color);
+  }
+
+  .button_top {
+    display: block;
+    box-sizing: border-box;
+    border: 2px solid var(--button_outline_color);
+    border-radius: var(--button_radius);
+    padding: 0.5em 1.25em;
+    background: var(--button_color);
+    color: var(--button_outline_color);
+    transform: translateY(-0.2em);
+    transition: transform 0.1s ease;
+  }
+
+  button:hover .button_top {
+    transform: translateY(-0.33em);
+  }
+
+  button:active .button_top {
+    transform: translateY(0);
+  }
+`;
+
+export default ContactButton; 
