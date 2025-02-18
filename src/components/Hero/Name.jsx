@@ -31,16 +31,17 @@ const StyledWrapper = styled.div`
     color: #ffffff;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
     display: flex;
     align-items: center;
-    gap: clamp(0.5rem, 1vw, 1rem);
+    gap: 0.75rem;
   }
 
   .words {
     overflow: hidden;
     position: relative;
-    height: clamp(2.5rem, 4vw, 3rem);
+    height: clamp(2rem, 3.5vw, 3rem);
+    min-width: 200px;
   }
   
   .words::after {
@@ -62,7 +63,8 @@ const StyledWrapper = styled.div`
     color: #956afa;
     animation: spin_4991 7s infinite;
     white-space: nowrap;
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.1rem, 2vw, 1.75rem);
+    line-height: clamp(2rem, 3.5vw, 3rem);
   }
 
   @keyframes spin_4991 {
@@ -76,17 +78,37 @@ const StyledWrapper = styled.div`
     100% { transform: translateY(-400%); }
   }
 
-  /* Tablet and smaller */
   @media (max-width: 768px) {
     .loader {
       justify-content: center;
+      font-size: 1.25rem;
+      gap: 0.5rem;
+    }
+
+    .words {
+      min-width: 180px;
+    }
+
+    .word {
+      font-size: 1.1rem;
     }
   }
 
-  /* Mobile */
   @media (max-width: 480px) {
     .card {
       padding: 0.25rem 0;
+    }
+
+    .loader {
+      font-size: 1.1rem;
+    }
+
+    .words {
+      min-width: 160px;
+    }
+
+    .word {
+      font-size: 1rem;
     }
   }
 `;
