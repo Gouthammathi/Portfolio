@@ -45,7 +45,7 @@ const Header = () => {
     return (
         <header
             ref={headerRef}
-            className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4 transition-colors duration-300 ease-in-out text-white"
+            className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-4 transition-colors duration-300 ease-in-out text-white font-mono"
             style={{ height: "60px", backgroundColor: "transparent" }}
         >
             <div className="text-xl font-bold tracking-wider hover:opacity-80 transition-opacity text-white">
