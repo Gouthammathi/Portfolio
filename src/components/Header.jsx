@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ContactButton from './ContactButton';
 import { gsap } from 'gsap';
+import Checkbox from './Hamburger';
 
 const Header = () => {
     const [visible, setVisible] = useState(true);
+    const [navOpen, setNavOpen] = useState(false);
     const lastScrollY = useRef(0);
     const headerRef = useRef(null);
     const isAnimating = useRef(false);
@@ -42,6 +44,10 @@ const Header = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    const toggleNav = () => {
+        setNavOpen(!navOpen);
+    };
+
     return (
         <header
             ref={headerRef}
@@ -51,7 +57,7 @@ const Header = () => {
             <div className="text-xl font-bold tracking-wider hover:opacity-80 transition-opacity text-white">
                 Goutham Mathi
             </div>
-            <nav className="flex-grow text-center">
+            <nav className={`flex-grow text-center ${navOpen ? 'block' : 'hidden'} md:block`}>
                 <ul className="flex justify-center space-x-8">
                     {["Home", "About", "Projects"].map((item) => (
                         <li key={item}>
@@ -64,6 +70,7 @@ const Header = () => {
                 </ul>
             </nav>
             <div className="flex items-center">
+                <Checkbox onClick={toggleNav} />
                 <ContactButton />
             </div>
         </header>
