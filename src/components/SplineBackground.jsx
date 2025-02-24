@@ -1,5 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, Suspense } from "react";
 import Spline from "@splinetool/react-spline";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { gsap } from "gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import SplitType from "split-type";
@@ -15,8 +17,22 @@ const titles = [
   "AI Tool Engineer",
 ];
 
+// Load the Avatar Model
+const Avatar = () => {
+  const { scene } = useGLTF("/avatar.glb");
+  const avatarRef = useRef();
+
+  // Continuous Rotation Effect
+  useFrame(() => {
+    if (avatarRef.current) {
+      avatarRef.current.rotation.y += 0.005; // Controls rotation speed
+    }
+  });
+
+  return <primitive object={scene} ref={avatarRef} scale={1} position={[0, -1.2, 0]} />;
+};
+
 const SplineBackground = () => {
-  const splineRef = useRef(null);
   const titleRef = useRef(null);
   const nameRef = useRef(null);
 
@@ -51,49 +67,58 @@ const SplineBackground = () => {
     });
   }, []);
 
-  // Mouse Interaction with 3D Model
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      if (!splineRef.current) return;
-
-      const { clientX: x, clientY: y } = event;
-      const normalizedX = (x / window.innerWidth - 0.5) * 2;
-      const normalizedY = (y / window.innerHeight - 0.5) * 2;
-
-      const object = splineRef.current.findObjectByName("Particles"); // Adjust this name based on your Spline model
-
-      if (object) {
-        object.position.x = normalizedX * 50;
-        object.position.y = normalizedY * 50;
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
     <StyledContainer>
-      {/* 3D Model */}
-      <Spline className="spline-viewer" ref={splineRef} scene="https://prod.spline.design/muWA8jEsc4Y5bc95/scene.splinecode" />
+      {/* Background Spline Scene */}
+      <ErrorBoundary>
+        <Spline
+          className="spline-viewer"
+          scene="https://prod.spline.design/muWA8jEsc4Y5bc95/scene.splinecode"
+        />
+      </ErrorBoundary>
 
-      {/* Overlayed Animated Text */}
+      {/* 3D Avatar */}
+      <div className="avatar-container">
+        <Canvas camera={{ position: [0, 5, 5], fov: 45 }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[2, 2, 5]} intensity={1} />
+          <Suspense fallback={null}>
+            <Avatar />
+          </Suspense>
+          <OrbitControls enableZoom={false} enablePan={false} />
+        </Canvas>
+      </div>
+
+      {/* Overlayed Text */}
       <div className="text-overlay">
-        <h1 ref={nameRef} className="name">
-          Goutham Mathi
-        </h1>
+        <h1 ref={nameRef} className="name">Goutham Mathi</h1>
         <div className="title">
           <p className="inline">I am a </p>
-          <span className="highlight" ref={titleRef}>
-            {titles[0]}
-          </span>
+          <span className="highlight" ref={titleRef}>{titles[0]}</span>
         </div>
       </div>
     </StyledContainer>
   );
 };
+
+// Error Boundary to prevent crashes
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <h2>Something went wrong loading the 3D model.</h2>;
+    }
+    return this.props.children;
+  }
+}
 
 // Styled Components
 const StyledContainer = styled.section`
@@ -110,17 +135,23 @@ const StyledContainer = styled.section`
     height: 100%;
   }
 
+  .avatar-container {
+    position: absolute;
+    top: 50%;
+    left: 10%; /* Positioning model to left-center */
+    transform: translateY(-50%);
+    width: 35%;
+    height: 80%;
+    z-index: 1;
+  }
+
   .text-overlay {
     position: absolute;
-    top: 200px; /* Adds spacing from the header */
-    left: 70px; /* Adjusted to align to top-left */
+    top: 20%;
+    right: 5%;
     text-align: left;
     color: white;
     z-index: 2;
-    background: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    backdrop-filter: none;
   }
 
   .name {
@@ -141,8 +172,8 @@ const StyledContainer = styled.section`
 
   @media (max-width: 768px) {
     .text-overlay {
-      top: 100px; /* Adjusts spacing for smaller screens */
-      left: 0px;
+      top: 10%;
+      right: 5%;
     }
 
     .name {
@@ -151,6 +182,11 @@ const StyledContainer = styled.section`
 
     .title {
       font-size: 1.2rem;
+    }
+
+    .avatar-container {
+      width: 60%;
+      left: 5%;
     }
   }
 `;
