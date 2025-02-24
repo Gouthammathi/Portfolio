@@ -47,21 +47,17 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between min-h-screen px-6 md:px-16 text-white w-full">
-      {/* Left Side - Text Content */}
-      <div className="max-w-lg text-center md:text-left">
-        <h1 ref={nameRef} className="text-5xl font-bold font-mono mb-4">
+    <section className="flex flex-col md:flex-row items-start justify-start min-h-screen px-6 md:px-16 pt-32 text-white w-full bg-transparent">
+      <div className="max-w-lg text-center md:text-left bg-transparent">
+        <h1 ref={nameRef} className="text-5xl font-bold font-mono mb-6">
           Goutham Mathi
         </h1>
-        <div className="text-xl md:text-2xl font-regular mt-4">
-          <p className="inline">I am a </p>
+        <div className="text-xl md:text-2xl font-regular bg-transparent">
           <span className="text-purple-400 font-semibold" ref={titleRef}>
             {titles[0]}
           </span>
         </div>
       </div>
-
-      {/* Right Side - 3D Model */}
     </section>
   );
 };

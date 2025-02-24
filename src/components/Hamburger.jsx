@@ -1,56 +1,66 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ onClick }) => {
+const Hamburger = ({ onClick, isOpen }) => {
   return (
-    <StyledWrapper onClick={onClick}>
-      <label className="hamburger">
-        <input type="checkbox" />
-        <svg viewBox="0 0 32 32">
-          <path className="line line-top-bottom" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22" />
-          <path className="line" d="M7 16 27 16" />
-        </svg>
+    <StyledWrapper data-active={isOpen}>
+      <label className="icon-menu" onClick={onClick}>
+        <div className="bar bar--1" />
+        <div className="bar bar--2" />
+        <div className="bar bar--3" />
       </label>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
-  .hamburger {
+  .icon-menu {
+    --gap: 5px;
+    --height-bar: 3px;
+    --pos-y-bar-one: 0;
+    --pos-y-bar-three: 0;
+    --scale-bar: 1;
+    --rotate-bar-one: 0;
+    --rotate-bar-three: 0;
+    width: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
     cursor: pointer;
+    position: relative;
   }
 
-  .hamburger input {
-    display: none;
+  .bar {
+    position: relative;
+    height: var(--height-bar);
+    width: 100%;
+    border-radius: .5rem;
+    background-color: white;
+    transition: all 0.3s ease;
   }
 
-  .hamburger svg {
-    height: 3em;
-    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  .bar--1 {
+    top: var(--pos-y-bar-one);
+    transform: rotate(var(--rotate-bar-one));
   }
 
-  .line {
-    fill: none;
-    stroke: white;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 3;
-    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  .bar--2 {
+    transform: scaleX(var(--scale-bar));
   }
 
-  .line-top-bottom {
-    stroke-dasharray: 12 63;
+  .bar--3 {
+    bottom: var(--pos-y-bar-three);
+    transform: rotate(var(--rotate-bar-three));
   }
 
-  .hamburger input:checked + svg {
-    transform: rotate(-45deg);
-  }
-
-  .hamburger input:checked + svg .line-top-bottom {
-    stroke-dasharray: 20 300;
-    stroke-dashoffset: -32.42;
+  /* Active state when menu is open */
+  &[data-active="true"] .icon-menu {
+    --pos-y-bar-one: calc(var(--gap) + var(--height-bar));
+    --pos-y-bar-three: calc(var(--gap) + var(--height-bar));
+    --scale-bar: 0;
+    --rotate-bar-one: 45deg;
+    --rotate-bar-three: -45deg;
   }
 `;
 
-export default Checkbox; 
+export default Hamburger;

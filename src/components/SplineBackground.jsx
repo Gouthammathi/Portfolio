@@ -65,9 +65,6 @@ const SplineBackground = () => {
       if (object) {
         object.position.x = normalizedX * 50;
         object.position.y = normalizedY * 50;
-
-        // Change the color of the particles to white
-        object.material.color.set(white); // Set color to white
       }
     };
 
@@ -115,14 +112,13 @@ const StyledContainer = styled.section`
 
   .text-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    top: 200px; /* Adds spacing from the header */
+    left: 70px; /* Adjusted to align to top-left */
+    text-align: left;
     color: white;
     z-index: 2;
     background: none;
-    padding: 20px;
+    padding: 10px 20px;
     border-radius: 10px;
     backdrop-filter: none;
   }
@@ -141,6 +137,21 @@ const StyledContainer = styled.section`
   .highlight {
     color: #a855f7;
     font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .text-overlay {
+      top: 100px; /* Adjusts spacing for smaller screens */
+      left: 0px;
+    }
+
+    .name {
+      font-size: 2.5rem;
+    }
+
+    .title {
+      font-size: 1.2rem;
+    }
   }
 `;
 

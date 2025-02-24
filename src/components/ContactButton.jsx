@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ContactButton = () => {
+const Hireme = () => {
   return (
     <StyledWrapper>
       <button>
-        <span className="button_top">Contact</span>
+        <span className="button_top">Hire me</span>
       </button>
     </StyledWrapper>
   );
@@ -47,4 +47,4 @@ const StyledWrapper = styled.div`
   }
 `;
 
-export default ContactButton; 
+export default Hireme; 
