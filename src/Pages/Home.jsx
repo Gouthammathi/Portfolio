@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import Hero from "../components/Hero/Hero";
-import SplineBackground from "../components/SplineBackground";
+import Desktop from "../components/Desktop";
 
 const Home = () => {
   return (
     <StyledWrapper>
-      <SplineBackground />
+      <Desktop />
       
     </StyledWrapper>
   );

@@ -23,7 +23,7 @@
     "three": "^0.173.0"
   },
   "resolutions": {
-    "three": "0.159.0",
+    "three": "^0.155.0",
     "stats-gl/three": "0.159.0"
   },
   "devDependencies": {
