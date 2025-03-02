@@ -1,12 +1,22 @@
-import React from 'react'
-import Layout from './components/Layout'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Layout from './components/Layout';
+import Home from './Pages/Home';
+import About from './Pages/About';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <Layout />
-    </div>
-  )
-}
+    <Router>
+      <Header />
+      <Layout>
+        <Routes>
+          <Route path="/home" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </Layout>
+    </Router>
+  );
+};
 
-export default App
+export default App;

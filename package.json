@@ -13,14 +13,16 @@
     "@react-three/drei": "^10.0.1",
     "@react-three/fiber": "^9.0.4",
     "@react-three/gltfjsx": "^4.3.4",
-    "@splinetool/loader": "^1.9.68",
+    "@splinetool/loader": "^1.9.70",
     "@splinetool/react-spline": "^4.0.0",
     "gsap": "^3.12.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.2.0",
     "split-type": "^0.3.4",
     "styled-components": "^6.0.7",
-    "three": "^0.173.0"
+    "three": "^0.173.0",
+    "three-orbitcontrols": "^2.110.2"
   },
   "resolutions": {
     "three": "^0.155.0",

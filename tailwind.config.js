@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx,ttf}"],
   theme: {
     extend: {
       animation: {
@@ -18,6 +18,9 @@ module.exports = {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
         },
+      },
+      fontFamily: {
+        glitar: ['Glitar', 'sans-serif'],
       },
     },
   },

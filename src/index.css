@@ -84,3 +84,10 @@ header a {
 header a:hover {
   text-decoration: underline;
 } */
+
+@font-face {
+    font-family: 'Glitar';
+    src: url('/font/Glitar.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

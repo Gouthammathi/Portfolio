@@ -16,8 +16,8 @@ const StyledWrapper = styled.div`
   
   button {
     --button_radius: 0.75em;
-    --button_color: #000000;
-    --button_outline_color: #ffffff;
+    --button_color: #ffffff;
+    --button_outline_color: #000000;
     font-size: 15px;
     font-weight: bold;
     border: none;
@@ -33,7 +33,7 @@ const StyledWrapper = styled.div`
     border-radius: var(--button_radius);
     padding: 0.5em 1.25em;
     background: var(--button_color);
-    color: var(--button_outline_color);
+    color: #101720;
     transform: translateY(-0.2em);
     transition: transform 0.1s ease;
   }
